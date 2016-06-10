@@ -1,0 +1,55 @@
+{
+  "name": "xkcd-comics",
+  "version": "1.0.0",
+  "description": "Downlad random xkcd comics from your console",
+  "main": "cli.js",
+  "bin": {
+    "xkcd": "cli.js"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeDotJS/xkcd-comics.git"
+  },
+  "keywords": [
+    "xkcd",
+    "random",
+    "images",
+    "comics",
+    "download",
+    "cli",
+    "cli-app",
+    "get",
+    "fetch",
+    "fun",
+    "sarcasm",
+    "math",
+    "language",
+    "webcomic"
+  ],
+  "dependencies": {
+    "got": "*",
+    "colors": "*",
+    "mkdirp": "*",
+    "update-notifier": "*",
+    "ora": "*"
+  },
+  "devDependencies": {
+    "ava": "*",
+    "xo": "*"
+  },
+  "xo": {
+    "esnext": true
+  },
+  "author": "Rishi Giri <rushforlinux@gmail.com> (http://rishigiri.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CodeDotJS/xkcd-comics/issues"
+  },
+  "homepage": "https://github.com/CodeDotJS/xkcd-comics#readme"
+}
