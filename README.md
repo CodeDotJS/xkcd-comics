@@ -11,7 +11,7 @@
 
 <h1 align="center">
 	<br>
-	<img width="760" src="https://github.com/rishigiridotcom/rishigiri.com/raw/gh-pages/github/xkcd.gif" alt="xkcd-comics">
+	<img width="470" src="https://raw.githubusercontent.com/rishigiridotcom/rishigiri.com/gh-pages/github/final_xkcd.gif" alt="xkcd-comics">
 	<br>
 	<br>
 </h1>
