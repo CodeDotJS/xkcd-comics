@@ -7,7 +7,7 @@
 </h1>
 
 
-> :satellite: download random xkcd comics from console
+> :satellite: download random xkcd comic strips from console
 
 <h1 align="center">
 	<br>
