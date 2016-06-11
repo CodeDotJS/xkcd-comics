@@ -60,6 +60,14 @@ got('http://xkcd.com/info.0.json').then(res => {
 		console.log(colors.cyan.bold(' ', alt));
 		console.log();
 		spinner.stop();
+		// for backup
+		mkdirp(xkcdComics, err => {
+			if (err) {
+				process.exit(1);
+			} else {
+				// no message
+			}
+		});
 		const comicOn = fs.createWriteStream(xkcdComics + comicName);
 		http.get(imageLink, (res, cb) => {
 			const dirMessage = colors.cyan.bold(xkcdComics.replace('./', '').replace('/', ''));
