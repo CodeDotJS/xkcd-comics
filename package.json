@@ -1,6 +1,6 @@
 {
   "name": "xkcd-comics",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Downlad random xkcd comic strips from your console",
   "main": "cli.js",
   "bin": {
