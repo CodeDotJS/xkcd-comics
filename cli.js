@@ -81,7 +81,7 @@ got('http://xkcd.com/info.0.json').then(res => {
 			});
 		});
 	});
-}).catch(error => {
+}).catch(err => {
 	process.exit(1);
-	console.log(error);
+	console.log(err);
 });
