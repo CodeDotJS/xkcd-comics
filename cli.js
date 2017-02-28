@@ -2,86 +2,73 @@
 
 'use strict';
 
-const fs = require('fs');
-const http = require('http');
+const os = require('os');
 const dns = require('dns');
+const fs = require('fs');
+const https = require('https');
+const fse = require('fs-extra');
 const got = require('got');
-const colors = require('colors/safe');
-const mkdirp = require('mkdirp');
+const chalk = require('chalk');
+const logUpdate = require('log-update');
 const ora = require('ora');
 const updateNotifier = require('update-notifier');
 const pkg = require('./package.json');
 
 updateNotifier({pkg}).notify();
 
-console.log();
-const spinner = ora();
+const arg = process.argv[2];
 
-dns.lookup('xkcd.com', err => {
-	if (err && err.code === 'ENOTFOUND') {
-		console.log(colors.red.bold(' ❱ Internet Connection   :   ✖\n'));
-		process.exit(1);
-	}
-	spinner.start();
-	spinner.text = colors.cyan.bold('XKCD Loves You!');
-});
-
-const xkcdComics = './XKCD/';
-
-mkdirp(xkcdComics, err => {
-	if (err) {
-		console.log(colors.red.bold('\n ❱ Directory Created      :    ✖\n'));
-		process.exit(1);
-	} else {
-		/* no need */
-	}
-});
-
-function comicsName(img) {
-	return img.split('/').pop();
+if (arg === '-h' || arg === '--help') {
+	console.log(`
+  ${chalk}
+  	`);
 }
 
-got('http://xkcd.com/info.0.json').then(res => {
-	spinner.start();
-	spinner.text = colors.green.bold('Have patience. All things are difficult before they become easy.');
-	const getCount = JSON.parse(res.body);
-	const startCount = getCount.num;
-	let randCount = Math.floor((Math.random() * startCount) + 1);
-	if (randCount === 404) {
-		randCount = Math.floor((Math.random() * startCount) + 1);
+const pre = chalk.red.bold('›');
+const pos = chalk.cyan.bold('›');
+const spinner = ora();
+const directory = `${os.homedir()}/xkcd-strips/`;
+
+fse.ensureDir(directory, err => {
+	if (err) {
+		process.exit(1);
 	}
-	const staticURL = `http://xkcd.com/${randCount}/info.0.json`;
-	got(staticURL).then(res => {
-		spinner.stop();
-		const semLink = JSON.parse(res.body);
-		const imageLink = semLink.img;
-		const alt = semLink.alt;
-		const comicName = comicsName(imageLink);
-		console.log(colors.cyan.bold(' ', alt));
-		console.log();
-		spinner.stop();
-		// for backup
-		mkdirp(xkcdComics, err => {
-			if (err) {
-				process.exit(1);
-			} else {
-				// no message
+});
+
+logUpdate();
+spinner.text = `xkcd loves you!`;
+spinner.start();
+
+dns.lookup('xkcd.com', err => {
+	if (err) {
+		logUpdate(`\n${pre} ${chalk.dim('Please check your internet connection!')}\n`);
+		process.exit(1);
+	} else {
+		got('http://xkcd.com/info.0.json', {json: true}).then(res => {
+			const body = res.body.num;
+			let randCount = Math.floor((Math.random() * body) + 1);
+			if (randCount === 404) {
+				randCount = Math.floor((Math.random() * body) + 1);
 			}
-		});
-		const comicOn = fs.createWriteStream(xkcdComics + comicName);
-		http.get(imageLink, (res, cb) => {
-			const dirMessage = colors.cyan.bold(xkcdComics.replace('./', '').replace('/', ''));
-			const comicColor = colors.cyan.bold(comicName);
-			spinner.start();
-			spinner.text = colors.green.bold(`Saving comics in ${dirMessage} ❱ ${comicColor}`);
-			res.pipe(comicOn);
-			comicOn.on('finish', () => {
-				spinner.stop();
-				comicOn.close(cb);
+			got(`https://xkcd.com/${randCount}/info.0.json`, {json: true}).then(res => {
+				const header = res.body;
+				const img = header.img;
+				const caption = header.alt;
+				const dir = header.safe_title;
+				logUpdate(`\n${pos} Title   : ${chalk.dim(dir)} \n\n${pos} Caption : ${chalk.dim(caption)}\n\n${pos} Strip   : ${chalk.dim(img.split('/').pop())}\n`);
+				const file = fs.createWriteStream(`${directory}${img.split('/').pop()}`);
+				https.get(img, (res, cb) => {
+					spinner.text = 'Saving Strip!';
+					res.pipe(file);
+					file.on('finish', () => {
+						spinner.stop();
+						file.close(cb);
+						file.on('error', () => {
+							process.exit(1);
+						});
+					});
+				});
 			});
 		});
-	});
-}).catch(err => {
-	process.exit(1);
-	console.log(err);
+	}
 });
