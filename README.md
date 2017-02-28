@@ -4,21 +4,19 @@
 	<img width="360" src="https://raw.githubusercontent.com/rishigiridotcom/rishigiri.com/gh-pages/github/xkcd.png" alt="xkcd-comics">
 	<br>
 	<img src="https://travis-ci.org/CodeDotJS/xkcd-comics.svg?branch=master">
+	<img src="https://img.shields.io/badge/code_style-XO-5ed9c7.svg">
 </h1>
 
 
-> :satellite: download random xkcd comic strips from console
+> :satellite: Download random xkcd comic strips from command line!
 
-<h1 align="center">
-	<br>
-	<img width="470" src="https://raw.githubusercontent.com/rishigiridotcom/rishigiri.com/gh-pages/github/final_xkcd.gif" alt="xkcd-comics">
-	<br>
-	<br>
-</h1>
+## Preview
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/rishigiridotcom/rishigiri.com/aa7e769568adedbc325cab5905e668f9321c2445/github/ezgif-1-489b562f42.gif">
+</p>
 
 ## Install
-
-__```NOTE :```__ <code>__```Ensure you have Node.JS version 4+ installed. Then run the following:```__</code>
 
 ```
 $ npm install --global xkcd-comics
@@ -36,15 +34,17 @@ $ sudo npm install --global xkcd-comics
 $ xkcd
 ```
 
+__`NOTE : `__ `Strips will be saved under` __`xkcd-strips folder`__ `in your` __`home directory`__
+
 ## Related
 
-- [image-of](https://github.com/CodeDotJS/image-of) : Download profile picture of any facebook user.
+- __[`image-of`](https://github.com/CodeDotJS/image-of)__ : `Download profile picture of any facebook user.`
 
-- [instavim](https://github.com/CodeDotJS/instavim) : A complete media downloader for instagram.
+- __[`instavim`](https://github.com/CodeDotJS/instavim)__ : `A complete media downloader for instagram`
 
-- [gravatar-of](https://github.com/CodeDotJS/gravatar-of) : Download avatar of any gravatar user from his/her email.
+- __[`gravatar-of`](https://github.com/CodeDotJS/gravatar-of)__ : `Download avatar of any gravatar user from his/her email.`
 
-- [twiger](https://github.com/CodeDotJS/twiger) : A complete media downloader for tiwtter.
+- __[`twiger`](https://github.com/CodeDotJS/twiger)__ : `A complete media downloader for tiwtter.`
 
 ## License
 
