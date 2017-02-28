@@ -1,7 +1,7 @@
 {
   "name": "xkcd-comics",
   "version": "1.0.1",
-  "description": "Downlad random xkcd comic strips from your console",
+  "description": "Download random xkcd comic strips from command line!",
   "main": "cli.js",
   "bin": {
     "xkcd": "cli.js"
@@ -33,11 +33,12 @@
     "webcomic"
   ],
   "dependencies": {
-    "got": "*",
-    "colors": "*",
-    "mkdirp": "*",
-    "update-notifier": "*",
-    "ora": "*"
+    "chalk": "^1.1.3",
+    "fs-extra": "^2.0.0",
+    "got": "^6.7.1",
+    "log-update": "^1.0.2",
+    "ora": "^1.1.0",
+    "update-notifier": "^2.1.0"
   },
   "devDependencies": {
     "ava": "*",
