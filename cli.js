@@ -16,14 +16,6 @@ const pkg = require('./package.json');
 
 updateNotifier({pkg}).notify();
 
-const arg = process.argv[2];
-
-if (arg === '-h' || arg === '--help') {
-	console.log(`
-  ${chalk}
-  	`);
-}
-
 const pre = chalk.red.bold('›');
 const pos = chalk.cyan.bold('›');
 const spinner = ora();
